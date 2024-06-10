@@ -84,10 +84,15 @@ class Author:
 
 
     def add_article(self, magazine, title):
-        pass
+        if isinstance(magazine, Magazine):
+            return Article(self, magazine, title)
 
     def topic_areas(self):
-        pass
+        if not self.magazines():
+            return None
+        else:
+            return list(set(item.category for item in self.magazines()))
+        
 
 class Magazine:
     all = []
@@ -134,7 +139,16 @@ class Magazine:
         return list(set(unique_list))
 
     def article_titles(self):
-        pass
+        if not self.articles():
+            return None
+        else:
+            return [item.title for item in self.articles()]
 
     def contributing_authors(self):
-        pass
+        list = []
+        for item in self.articles():
+            if len(self.articles()) <=2:
+                return None
+            else:
+                list.append(item.author)
+        return list
